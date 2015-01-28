@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>上传你的简历</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="static/css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="static/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"> -->
+    <!-- <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        
+        .fileUpload {
+            position: relative;
+            overflow: hidden;        }
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+    </style>
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">上传你的简历</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+
+                    <li class="page-scroll">
+                        <a href="#about">关于我们</a>
+                    </li>
+                   <!--  <li class="page-scroll">
+                        <a href="mailto:wi.inputmethod@gmail.com?subject=联系wi输入法团队">联系我们</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="static/img/profile.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">{{ success|default:"自荐简历" }}</span>
+                        <hr class="star-light">
+                        <div class="col-md-6 col-md-offset-3">
+                            <p>为了下学期的春季招聘大家能找到心仪的实习单位,阿里巴巴俱乐部邀请了涂志莹老师,尹胜君老师,与在阿里实习过的<a href="http://blog.gkuchan.com/">王潇雨</a>,<a href="http://www.zhaoguoquan.com">赵国铨</a>,通过木瓜移动面试的<a href="https://skyline75489.github.io/">刘佳亮</a>同学为大家指点简历中需要注意的地方.如希望获得指导,请填写以下信息.</p>
+                            <p>为了保护隐私,大家在姓名一览中可以使用昵称.</p>
+                        </div>
+                        
+                    </div>
+                 
+
+
+                   <form enctype="multipart/form-data" method="post" action="" class="form-horizontal "style="text-align: center">{% csrf_token %}
+                      <div class="form-group">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            {{ form.nickname.errors }}
+                          <input type="text" class="form-control" id="nickname" name="nickname"placeholder="昵称">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            {{form.email.errors}}
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
+                      </div>
+                      
+                      
+
+                      <div class="form-group">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            {{form.reason.errors}}
+                            <textarea class="form-control" rows="3" placeholder="自荐理由" name="reason" id="reason"></textarea>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+
+                        <div class="row" >
+                            <div class="col-md-4 col-md-offset-4">
+                                <div class="fileUpload btn btn-warning">
+                                    <span class="glyphicon glyphicon-upload" aria-hidden="true">选择简历</span>
+                                    {{form.file.errors}}
+                                    <input type="file" class="upload" name="file" id="file"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-4 col-md-offset-4" style="margin-top: 20px">
+                              <input type="submit" class="btn btn-info  btn-block" value="上传我的简历">
+                            </div>
+                        </div>
+                      </div>
+                    </form>
+                   
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row text-center">
+                <!-- <div class="col-lg-4 col-lg-offset-2">
+                    <p>WI输入法是由哈尔滨工业大学计算机学院语言技术研究中心网络智能研究室开发的iPhone、iPad、iPod Touch、Android等平台上的智能拼音语句输入法。</p>
+                    <p>它支持语句输入，智能纠错，模糊音输入，简拼输入以及多种双拼输入；荣获2010中国互联网最佳技术创新产品提名奖。</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>哈尔滨工业大学网络智能研究室，是哈尔滨工业大学计算机学院语言技术研究中心所属的以网络智能技术研究为主要研发方向的科研团体。自2007年成立以来，先后开展了下一代个性化信息检索、面向bbs与博客的情感倾向性分析、隐式用户兴趣挖掘、中文浅层句法分析等多项研究。</p>
+                </div> -->
+                    <p>哈工大阿里巴巴俱乐部</p>
+                    <p>项目地址:<a href="https://github.com/HIT-Alibaba" style="color:white;text">https://github.com/HIT-Alibaba</a></p>
+                
+            </div>
+        </div>
+    </section>
+        <div class="text-center footer-above" style="background: #18bc9c;color:white" >
+            <p>built by <a href="http://blog.zhaoguoquan.com" style="color:white">ZGQ</a></p>
+        </div>
+    
+
+
+   
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visble-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="static/js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="static/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="static/js/classie.js"></script>
+    <script src="static/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="static/js/jqBootstrapValidation.js"></script>
+    <script src="static/js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="static/js/freelancer.js"></script>
+    
+
+</body>
+
+</html>
