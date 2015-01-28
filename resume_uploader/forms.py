@@ -10,10 +10,10 @@ class ResumeForm(forms.Form):
         from django.utils.translation import ugettext_lazy as _
         content = self.cleaned_data['file']
         content_type = content.content_type.split('/')[1]
-        if content_type in ['pdf','doc','docx','pages']:
+        if content_type in ['pdf','msword','vnd.openxmlformats-officedocument.wordprocessingml.document']:
             if content._size > 20971520:
                 raise forms.ValidationError(_('Please keep filesize under %s. Current filesize %s') % (filesizeformat(20971520), filesizeformat(content._size)))
         else:
-            raise forms.ValidationError(_('文件格式不支持,请上传PDF,doc,docx,pages等格式'))
+            raise forms.ValidationError(_('文件格式不支持,请上传PDF,doc,docx格式'))
         return content
 
