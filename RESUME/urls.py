@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^$',handle_resume_upload),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^upload_file/(.*)',handle_resume_download)
 )
