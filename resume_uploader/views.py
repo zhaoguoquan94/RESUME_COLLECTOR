@@ -36,3 +36,13 @@ def handle_resume_download(request,url):
     response=HttpResponse(data,content_type="application/force-download")
     response['Content-Disposition'] = 'attachment; filename=%s' % selected_resume.file.name.encode("utf-8")
     return response
+def handle_resume_search(request):
+    if request.method=="POST":
+        emailform=EmailForm(request.POST)
+        if emailform.is_valid():
+            resumes=Resume.objects.filter(email=emailform.cleaned_data['email'])
+            responsestr=""
+            for r in resumes:
+                responsestr+=unicode(r)+u"<br>\n\n"
+            return HttpResponse(responsestr)
+

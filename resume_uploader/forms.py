@@ -17,3 +17,5 @@ class ResumeForm(forms.Form):
             raise forms.ValidationError(_('文件格式不支持,请上传PDF,doc,docx格式'))
         return content
 
+class EmailForm(forms.Form):
+    email=forms.EmailField(max_length=128)
